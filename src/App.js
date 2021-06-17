@@ -4,7 +4,7 @@ import Select from 'react-select';
 import { Helmet } from 'react-helmet';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CustomInput from './components/Input';
-import { ErrorToast } from './components/Alert';
+import { ErrorToast, SuccessToast } from './components/Alert';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ToastContainer } from 'react-toastify';
@@ -36,35 +36,126 @@ function App() {
         {nome: "Marabá", id: "1"},
         {nome: "Parauapebas", id: "2"},
     ];
+
+	const sexo = [
+		{value: 'Selecione o sexo', id: '0'},
+		{value: 'Masculino', id: '1'},
+		{value: 'Feminino', id: '2'},
+		{value: 'Não sei ainda', id: '3'},
+	];
     
     const empresas = [
-        {value: 'Não há nessa lista', id: 1},
+		{value: 'Selecione uma empresa', id: '0'},
+        {value: 'Não há nessa lista', id: '1'},
     ];
 
 	const [lojasFiltradas, setLojasFiltradas] = useState('');
-	const [mostrarFormulario, setMostrarFormulario] = useState('');
+	const [mostrarFormulario, setMostrarFormulario] = useState(false);
 	const [nome, setNome] = useState('');
 	const [cpf, setCpf] = useState('');
 	const [telefone, setTelefone] = useState('');
 	const [email, setEmail] = useState('');
 	const [nascimento, setNascimento] = useState('');
+	const [isGestante, setIsGestante] = useState(false);
+	const [hasDependentes, setHasDependentes] = useState(false);
+	const [semanas, setSemanas] = useState('');
+	const [previsao, setPrevisao] = useState('');
+	const [nomeBebe, setNomeBebe] = useState('');
+	const [sexoBebe, setSexoBebe] = useState('');
+	const [senha, setSenha] = useState('');
+	const [confirmaSenha, setConfirmaSenha] = useState('');
+	const [aceitoTermo, setAceitoTermo] = useState(false);
+	const [empresa, setEmpresa] = useState('');
+	const [empresaOndeTrabalha, setEmpresaOndeTrabalha] = useState('');
 
 
 	function validar(){
-		if(nome == ''){
-			ErrorToast({ message: 'Preencha o campo Nome Completo', headerMessage: 'Ops, há pendencias de preenchimento:' });
+		let validacoes = true;
+		if(nome === ''){
+			validacoes = false;
+			ErrorToast({ message: 'Preencha o campo Nome Completo', headerMessage: 'Ops, há pendências de preenchimento:' });
 			return;
 		}
-		if(cpf == ''){
-			ErrorToast({ message: 'Preencha o campo CPF', headerMessage: 'Ops, há pendencias de preenchimento:' });
+		if(cpf === ''){
+			validacoes = false;
+			ErrorToast({ message: 'Preencha o campo CPF', headerMessage: 'Ops, há pendências de preenchimento:' });
 			return;
 		}
-		if(email == ''){
-			ErrorToast({ message: 'Preencha o campo Email', headerMessage: 'Ops, há pendencias de preenchimento:' });
+		if(telefone === ''){
+			validacoes = false;
+			ErrorToast({ message: 'Preencha o campo Telefone', headerMessage: 'Ops, há pendências de preenchimento:' });
 			return;
 		}
-		if(nascimento == ''){
-			ErrorToast({ message: 'Preencha o campo Nascimento', headerMessage: 'Ops, há pendencias de preenchimento:' });
+		if(empresa !== '1'){
+			validacoes = false;
+			ErrorToast({ message: 'Selecione uma Empresa', headerMessage: 'Ops, há pendências de preenchimento:' });
+			return;
+		}
+		if(empresa === '1'){
+			if(empresaOndeTrabalha === ''){
+				validacoes = false;
+				ErrorToast({ message: 'Preencha o campo Empresa onde trabalha', headerMessage: 'Ops, há pendências de preenchimento:' });
+				return;
+			}
+		}
+		if(email === ''){
+			validacoes = false;
+			ErrorToast({ message: 'Preencha o campo Email', headerMessage: 'Ops, há pendências de preenchimento:' });
+			return;
+		}
+		if(email !== ''){
+			let valido = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email);
+			if (!valido){
+				validacoes = false;
+				ErrorToast({ message: 'Preencha um Email válido', headerMessage: 'Ops, há pendências de preenchimento:' });
+				return;
+			}
+		}
+		if(nascimento === ''){
+			validacoes = false;
+			ErrorToast({ message: 'Preencha o campo Nascimento', headerMessage: 'Ops, há pendências de preenchimento:' });
+			return;
+		}
+		if(isGestante){
+			if(semanas === ''){
+				validacoes = false;
+				ErrorToast({ message: 'Preencha o campo Quantas Semanas', headerMessage: 'Ops, há pendências de preenchimento:' });
+				return;
+			}
+			// TODO: Validar previsao do parto (somente data futura)
+			if(previsao === ''){
+				validacoes = false;
+				ErrorToast({ message: 'Preencha o campo Previsão do parto', headerMessage: 'Ops, há pendências de preenchimento:' });
+				return;
+			}
+			if(sexoBebe === '' || sexoBebe === 'Selecione o sexo'){
+				validacoes = false;
+				ErrorToast({ message: 'Selecione o Sexo do Bebê', headerMessage: 'Ops, há pendências de preenchimento:' });
+				return;
+			}
+		}
+		if( senha === ''){
+			validacoes = false;
+			ErrorToast({ message: 'Preencha o campo Senha', headerMessage: 'Ops, há pendências de preenchimento:' });
+			return;
+		}
+		if( confirmaSenha === ''){
+			validacoes = false;
+			ErrorToast({ message: 'Preencha o campo Confirmar Senha', headerMessage: 'Ops, há pendências de preenchimento:' });
+			return;
+		}
+		if( senha !== confirmaSenha){
+			validacoes = false;
+			ErrorToast({ message: 'As senhas digitadas devem ser iguais', headerMessage: 'Ops, há pendências de preenchimento:' });
+			return;
+		}
+		if(!aceitoTermo){
+			validacoes = false;
+			ErrorToast({ message: 'Aceite os termos de uso e políticas de privacidade', headerMessage: 'Ops, há pendências de preenchimento:' });
+			return;
+		}
+		if(validacoes){
+			SuccessToast({ message: 'Você concluiu seu cadastro.', headerMessage: 'Parabéns!' });
 			return;
 		}
 	}
@@ -72,7 +163,7 @@ function App() {
 	function validarCpf(val){
 		let cpf = val.target.value.replace(/[^\d]+/g, '');
 		if (cpf.length !== 11) {
-            ErrorToast({ message: 'O campo CPF parece não estar completo', headerMessage: 'Ops, há pendencias de preenchimento:' });
+            ErrorToast({ message: 'O campo CPF parece não estar completo', headerMessage: 'Ops, há pendências de preenchimento:' });
 			return;
         }
 	}
@@ -80,7 +171,7 @@ function App() {
 	function validarTelefone(val){
 		let tel = val.target.value.replace(/[^\d]+/g, '');
 		if (tel.length !== 11) {
-            ErrorToast({ message: 'O campo Telefone parece não estar completo', headerMessage: 'Ops, há pendencias de preenchimento:' });
+            ErrorToast({ message: 'O campo Telefone parece não estar completo', headerMessage: 'Ops, há pendências de preenchimento:' });
 			return;
         }
 	}
@@ -117,20 +208,6 @@ function App() {
 		}
 	}
 
-
-
-	// 	if (isGestante) {
-    //         if (!valueName || valueName === '' || !valueSemanas || valueSemanas === '' || !valueSexo || valueSexo === ''
-    //             || !valuePrevisaoParto || valuePrevisaoParto === '') {
-    //             ErrorToast({ message: 'Preencha todos os campos da área "Está gestante?" ou desmarque esta opção', headerMessage: 'Ops! Há pendências de preenchimento:' });
-    //             return;
-    //         }
-    //     }
-	// 	if (valueSenha !== valueConfirmaSenha) {
-	// 		ErrorToast({ message: "As senhas não são iguais", headerMessage: 'Ops! Algo errado:' });
-	// 		return;
-	// 	}
-	
 	function mudarCidade(city){
 		const filtered = lojas.filter(x => x.cidade === city.nome);
 		setLojasFiltradas(filtered);
@@ -140,6 +217,14 @@ function App() {
 		if(loja.codLoja !== '0'){
 			setMostrarFormulario(true);
 		}
+	}
+
+	function mudarSexo(sexo){
+		setSexoBebe(sexo.value);
+	}
+
+	function mudarEmpresa(empresas){
+		setEmpresa(empresas.id);
 	}
 
 
@@ -224,13 +309,21 @@ function App() {
 										getOptionLabel={(empresas)=>empresas.value}
 										getOptionValue={(empresas)=>empresas.id}
 										placeholder="Selecione uma empresa"
+										onChange={empresas => mudarEmpresa(empresas)}
 										/>
 								</div>
 							</div>
+							{empresa === '1' ? 
+							<div className="col-md-12 col-12">
+								<div className="custom-form-group mt-10 form-group">
+									<CustomInput label="Empresa onde trabalha ou como conheceu o benefício*" required={true} onChange={setEmpresaOndeTrabalha} />
+								</div>
+							</div>
+							: null }
 							{/* EMAIL E DATA DE NASCIMENTO */}
 							<div className="col-md-6 col-12">
 								<div className="custom-form-group mt-10 form-group">
-								<CustomInput label="Email*" required={true} placeholder="seuemail@email.com" onChange={setEmail} inputMode="email" />
+								<CustomInput label="Email*" required={true} placeholder="seuemail@email.com" onChange={setEmail} inputMode="email"/>
 								</div>
 							</div>
 							<div className="col-md-6 col-12">
@@ -256,13 +349,45 @@ function App() {
 					<div className="pt-3 col-md-6 col-12">
 						<div className="linha">
 							<div className="left">
-								<input type="checkbox"/>
+								<input type="checkbox" onChange={(e) => setIsGestante(e.target.checked)}/>
 								<label className="form-label ml-1 black">Está gestante?</label>
 							</div>
 						</div>
+						{isGestante ? 
+							<div className="row mb-2">
+								<div className="col-md-6 col-12">
+									<div className="custom-form-group mt-10 form-group">
+									<CustomInput label="Quantas Semanas*" required={true} onChange={setSemanas} type="number" inputMode="numeric" />
+									</div>
+								</div>
+								<div className="col-md-6 col-12">
+									<div className="custom-form-group mt-10 form-group">
+									<CustomInput label="Previsão do parto*" required={true} onChange={setPrevisao} mascara="true" mask="99/99/9999" inputMode="numeric" onBlur={validarNascimento}/>
+									</div>
+								</div>
+								<div className="col-md-6 col-12">
+									<div className="custom-form-group mt-10 form-group">
+									<CustomInput label="Nome do bebê" onChange={setNomeBebe} placeholder="Digite o nome"/>
+									</div>
+								</div>
+								<div className="col-md-6 col-12">
+									<div className="custom-form-group mt-10 form-group">
+										<div className="col-sm-1">
+											<label className="form-label negrito">Sexo*</label>
+										</div>
+										<Select className="basic-single" options={sexo} 
+											getOptionLabel={(sexo)=>sexo.value}
+											getOptionValue={(sexo)=>sexo.id}
+											placeholder="Selecione o sexo"
+											onChange={sexo => mudarSexo(sexo)}
+											/>
+									</div>
+								</div>
+							</div>
+						: null}
 						<div className="linha">
 							<div className="left">
-								<input type="checkbox"/>
+								<input type="checkbox" onChange={(e) => setHasDependentes(e.target.checked)}/>
 								<label className="form-label ml-1 black">Possui Dependentes?</label>
 							</div>
 						</div>
@@ -284,19 +409,17 @@ function App() {
 						<div className="row">
 							<div className="col-md-6 col-12">
 								<div className="custom-form-group form-group">
-									<label className="form-label negrito left">Senha*</label>
-									<input type="password" className="custom-input form-control"/>
+									<CustomInput label="Senha*" onChange={setSenha} type="password"/>
 								</div>
 							</div>
 							<div className="col-md-6 col-12">
 								<div className="custom-form-group form-group">
-									<label className="form-label negrito left">Confirmar senha*</label>
-									<input type="password" className="custom-input form-control"/>
+									<CustomInput label="Confirmar Senha*" onChange={setConfirmaSenha} type="password"/>
 								</div>
 							</div>
 							<div className="linha">
 								<div className="mt-10">
-									<input type="checkbox"/>
+									<input type="checkbox" onChange={(e) => setAceitoTermo(e.target.checked)}/>
 									<label className="form-label ml-1 black termos">
 										Ao finalizar, você concorda com nossos <a href="https://aprincipalbb.com.br/termos-de-uso.php" target="_blank" rel="noreferrer">Termos de uso</a> e <a href="https://aprincipalbb.com.br/politica-de-privacidade.php" target="_blank" rel="noreferrer">Política de privacidade</a>
 									</label>
