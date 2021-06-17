@@ -1,14 +1,15 @@
 import './App.css';
-import React, { useState } from 'react';
 import Select from 'react-select';
 import { Helmet } from 'react-helmet';
+import React, { useState } from 'react';
+import Input from './components/Input';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import CustomInput from './components/Input';
-import { ErrorToast, SuccessToast } from './components/Alert';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { ErrorToast, SuccessToast } from './components/Alert';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 function App() {
 
@@ -239,7 +240,7 @@ function App() {
 			<div className="App-body">
                 <ToastContainer />
 				{/* CADASTRE-SE */}
-				<div className="m-auto col-md-6 col-12">
+				<div className="col-md-6 col-12">
 					<FontAwesomeIcon color="#f6398d" icon={faUser} size={'2x'} />
 					<label className="cadastre">Cadastre-se</label>
 				</div>
@@ -286,18 +287,18 @@ function App() {
 							{/* NOME E CPF */}
 							<div className="col-md-6 col-12">
 								<div className="custom-form-group mt-10 form-group">
-									<CustomInput label="Nome Completo*" required={true} placeholder="Digite seu nome" onChange={setNome} />
+									<Input label="Nome Completo*" required={true} placeholder="Digite seu nome" onChange={setNome} />
 								</div>
 							</div>
 							<div className="col-md-6 col-12">
 								<div className="custom-form-group mt-10 form-group">
-									<CustomInput label="CPF*" required={true} placeholder="000.000.000-00" onChange={setCpf} mascara="true" mask="999.999.999-99" inputMode="numeric" onBlur={validarCpf} />
+									<Input label="CPF*" required={true} placeholder="000.000.000-00" onChange={setCpf} mascara="true" mask="999.999.999-99" inputMode="numeric" onBlur={validarCpf} />
 								</div>
 							</div>
 							{/* TELEFONE E EMPRESA */}
 							<div className="col-md-6 col-12">
 								<div className="custom-form-group mt-10 form-group">
-									<CustomInput label="Telefone (WhatsApp)*" required={true} placeholder="(00) 00000-0000" onChange={setTelefone} mascara="true" mask="(99)99999-9999" inputMode="numeric" onBlur={validarTelefone}/>
+									<Input label="Telefone (WhatsApp)*" required={true} placeholder="(00) 00000-0000" onChange={setTelefone} mascara="true" mask="(99)99999-9999" inputMode="numeric" onBlur={validarTelefone}/>
 								</div>
 							</div>
 							<div className="col-md-6 col-12">
@@ -316,19 +317,19 @@ function App() {
 							{empresa === '1' ? 
 							<div className="col-md-12 col-12">
 								<div className="custom-form-group mt-10 form-group">
-									<CustomInput label="Empresa onde trabalha ou como conheceu o benefício*" required={true} onChange={setEmpresaOndeTrabalha} />
+									<Input label="Empresa onde trabalha ou como conheceu o benefício*" required={true} onChange={setEmpresaOndeTrabalha} />
 								</div>
 							</div>
 							: null }
 							{/* EMAIL E DATA DE NASCIMENTO */}
 							<div className="col-md-6 col-12">
 								<div className="custom-form-group mt-10 form-group">
-								<CustomInput label="Email*" required={true} placeholder="seuemail@email.com" onChange={setEmail} inputMode="email"/>
+								<Input label="Email*" required={true} placeholder="seuemail@email.com" onChange={setEmail} inputMode="email"/>
 								</div>
 							</div>
 							<div className="col-md-6 col-12">
 								<div className="custom-form-group mt-10 form-group">
-								<CustomInput label="Data de Nascimento*" required={true} onChange={setNascimento} mascara="true" mask="99/99/9999" inputMode="numeric" onBlur={validarNascimento}/>
+								<Input label="Data de Nascimento*" required={true} onChange={setNascimento} mascara="true" mask="99/99/9999" inputMode="numeric" onBlur={validarNascimento}/>
 								</div>
 							</div>
 						</div>
@@ -357,17 +358,17 @@ function App() {
 							<div className="row mb-2">
 								<div className="col-md-6 col-12">
 									<div className="custom-form-group mt-10 form-group">
-									<CustomInput label="Quantas Semanas*" required={true} onChange={setSemanas} type="number" inputMode="numeric" />
+									<Input label="Quantas Semanas*" required={true} onChange={setSemanas} type="number" inputMode="numeric" />
 									</div>
 								</div>
 								<div className="col-md-6 col-12">
 									<div className="custom-form-group mt-10 form-group">
-									<CustomInput label="Previsão do parto*" required={true} onChange={setPrevisao} mascara="true" mask="99/99/9999" inputMode="numeric" onBlur={validarNascimento}/>
+									<Input label="Previsão do parto*" required={true} onChange={setPrevisao} mascara="true" mask="99/99/9999" inputMode="numeric" onBlur={validarNascimento}/>
 									</div>
 								</div>
 								<div className="col-md-6 col-12">
 									<div className="custom-form-group mt-10 form-group">
-									<CustomInput label="Nome do bebê" onChange={setNomeBebe} placeholder="Digite o nome"/>
+									<Input label="Nome do bebê" onChange={setNomeBebe} placeholder="Digite o nome"/>
 									</div>
 								</div>
 								<div className="col-md-6 col-12">
@@ -409,12 +410,12 @@ function App() {
 						<div className="row">
 							<div className="col-md-6 col-12">
 								<div className="custom-form-group form-group">
-									<CustomInput label="Senha*" onChange={setSenha} type="password"/>
+									<Input label="Senha*" onChange={setSenha} type="password"/>
 								</div>
 							</div>
 							<div className="col-md-6 col-12">
 								<div className="custom-form-group form-group">
-									<CustomInput label="Confirmar Senha*" onChange={setConfirmaSenha} type="password"/>
+									<Input label="Confirmar Senha*" onChange={setConfirmaSenha} type="password"/>
 								</div>
 							</div>
 							<div className="linha">

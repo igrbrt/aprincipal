@@ -1,5 +1,6 @@
 ::-webkit-scrollbar{
-  width:4px;height:0;-webkit-border-radius:16px;
+  width:4px;height:0;
+  -webkit-border-radius:16px;
 }
 ::-webkit-scrollbar-track-piece{
   background-color:#fff;
@@ -18,8 +19,9 @@
   height: 40vmin;
   pointer-events: none;
 }
+
 .App-header {
-  min-height: 100vh;
+  min-height: 82vh;
   display: flex;
   flex-direction: column;
   font-size: calc(10px + 2vmin);
@@ -36,7 +38,7 @@
   align-items: center;
   justify-content: center;
   color: rgb(246, 57, 141);
-  margin-top: -5rem;
+  /* margin-top: -5rem; */
 }
 
 .app-center{
@@ -81,8 +83,12 @@
   margin-left: 1em;
 }
 
+.mb-1{
+  margin-bottom: 1em;
+}
+
 .mb-2{
-  margin-bottom: 2em;;
+  margin-bottom: 2em;
 }
 
 .black{
