@@ -1,6 +1,6 @@
 import './App.css';
 import Select from 'react-select';
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import React, { useState } from 'react';
 import Input from './components/Input';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -231,9 +231,12 @@ function App() {
 
 	return (
 		<div className="App">
-			<Helmet>
-				<title>Baby+ Convênio</title>
-			</Helmet>
+			<HelmetProvider>
+				<Helmet>
+					<title>Baby+ Convênio</title>
+				</Helmet>
+			</HelmetProvider>
+			
 			<header className="App-header">
 				<img src='/images/convenio.jpeg' className="logo" alt="logo" />
 			</header>
