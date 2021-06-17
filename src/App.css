@@ -6,26 +6,90 @@
   height: 40vmin;
   pointer-events: none;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.logo{
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+
+.App-body{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(246, 57, 141);
+  margin-top: -5rem;
 }
 
-.App-link {
-  color: #61dafb;
+.cadastre{
+  font-size: 25px;
+  font-weight: bold;
+  margin-left: 2px;
+}
+
+.negrito{
+  font-weight: bold;
+}
+
+.fs-20{
+  font-size: 20px;
+}
+
+.fs-14{
+  font-size: 14px;
+}
+
+.mt-1{
+  margin-top: 1em;
+}
+
+.mt-10{
+  margin-top: 2em;
+}
+
+.left{
+  float: left;
+}
+
+.ml-1{
+  margin-left: 1em;
+}
+
+.black{
+  color: black;
+}
+
+.termos{
+  font-size: 0.8rem;
+}
+
+.regras{
+  padding-left: 1rem;
+}
+
+.custom-form-group .form-control {
+  border-color: #ff7dbd;
+}
+
+.linha{
+  display: flex;
+  flex-direction: row;
+}
+.lista_itens{
+  color: rgb(119, 119, 119);
+  font-size: 80%;
+  text-align: left;
+}
+
+.underline{
+  width: 100%;
+  border-bottom: 1px solid rgb(246, 57, 141);
 }
 
 @keyframes App-logo-spin {
