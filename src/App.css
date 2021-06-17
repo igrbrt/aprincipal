@@ -27,6 +27,14 @@
   margin-top: -5rem;
 }
 
+.app-center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgb(246, 57, 141);
+}
+
 .cadastre{
   font-size: 25px;
   font-weight: bold;
@@ -81,6 +89,7 @@
   display: flex;
   flex-direction: row;
 }
+
 .lista_itens{
   color: rgb(119, 119, 119);
   font-size: 80%;
@@ -92,11 +101,22 @@
   border-bottom: 1px solid rgb(246, 57, 141);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.botao{
+  background: rgb(246, 57, 141);
+  color: rgb(255, 255, 255);
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: normal;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  border-radius: 0.25rem;
+  transition: all 0.15s ease-in-out 0s;
 }
