@@ -58,10 +58,10 @@ function App() {
 	const [email, setEmail] = useState('');
 	const [nascimento, setNascimento] = useState('');
 	const [isGestante, setIsGestante] = useState(false);
-	const [hasDependentes, setHasDependentes] = useState(false);
+	const [setHasDependentes] = useState(false);
 	const [semanas, setSemanas] = useState('');
 	const [previsao, setPrevisao] = useState('');
-	const [nomeBebe, setNomeBebe] = useState('');
+	const [setNomeBebe] = useState('');
 	const [sexoBebe, setSexoBebe] = useState('');
 	const [senha, setSenha] = useState('');
 	const [confirmaSenha, setConfirmaSenha] = useState('');
