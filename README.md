@@ -1,4 +1,4 @@
-# Projeto criado no processo seletivo da A Principal
+# Projeto em React para loja A Principal
 
 
 ## Para rodar o projeto siga os passos abaixo:
